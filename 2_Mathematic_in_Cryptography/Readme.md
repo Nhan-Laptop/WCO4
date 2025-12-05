@@ -14,7 +14,7 @@
 
 ---
 
-## 2. Missons
+## 2. Missions
 **Các khái niệm cơ bản và bài tập:**
 
 * URL = https://giapppp.notion.site/Mathematic-in-Cryptography-01a27fda51a943d2b04fbe840e5dd26b
@@ -23,7 +23,7 @@
 
 ## 3. References
 
-[1]. file:///D:/An%20Introduction%20to%20Mathematical%20Cryptography%20(2014)%20-%20Hoffstein,%20Pipher,%20Silverman.pdf
+[1]. https://drive.google.com/file/d/1oCFR_QdxqJ4iumYi3QIk5Z-mn0PYmWqg/view?usp=drivesdk
 
 [2]. https://ken3k06.github.io/Blog/Math/
 
