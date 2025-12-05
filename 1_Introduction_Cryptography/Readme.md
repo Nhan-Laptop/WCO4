@@ -86,7 +86,7 @@ Trong bảo mật thông tin, cryptography thường được dùng để đạt
 
 > Thực tế, hầu hết hệ thống thực tế sử dụng **kết hợp**: public‑key cho trao đổi khóa, symmetric‑key cho mã hóa dữ liệu.
 
-### 3.3. Chữ ký số (Cryptographic Hash Function)
+### 3.3. Hàm băm (Cryptographic Hash Function)
 
 * Hàm ( H ) nhận vào thông điệp tùy ý độ dài, trả về **hash** (digest) có độ dài cố định.
 * Thuộc tính quan trọng:
