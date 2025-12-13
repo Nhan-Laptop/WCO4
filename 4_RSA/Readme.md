@@ -33,7 +33,7 @@ Năm 1977, Rivest, Shamir và Adleman (RSA) đã công bố thuật toán giải
 
 - Là số tự nhiên lớn hơn 1 chỉ chia hết cho 1 và chính nó.
 
-- RSA dựa trên việc: Nhân hai số nguyên tố lớn thì dễ, nhưng từ tích số đó tìm lại hai số ban đầu (phân tích thừa số nguyên tố) là CỰC KỲ KHÓ -> thuật toán hiệu quả nhất cho đến nay vẫn là brute-force.
+- RSA dựa trên việc: Nhân hai số nguyên tố lớn thì dễ, nhưng từ tích số đó tìm lại hai số ban đầu (phân tích thừa số nguyên tố) là CỰC KỲ KHÓ.
 
 ### 2.2. Đồng dư thức (Modular Arithmetic)
 
@@ -129,12 +129,10 @@ $$M = C^d \pmod n$$
 --- 
 ## 4: Ứng dụng. 
 
-- **Bảo mật giao dịch trực tuyến**: Mã hóa thông tin thẻ tín dụng, dữ liệu thanh toán, và xác thực người dùng trong ngân hàng điện tử (e-banking) và thương mại điện tử (e-commerce).
-- **Chữ ký số**: Tạo chữ ký điện tử cho hợp đồng, văn bản, và giao dịch số để đảm bảo tính xác thực, chống giả mạo (phù hợp với các tiêu chuẩn như GDPR, PCI DSS).
-- **Bảo mật kênh truyền (SSL/TLS)**: Mã hóa dữ liệu truyền tải giữa trình duyệt và máy chủ web (HTTPS), bảo vệ các cuộc trò chuyện, email và VPN khỏi bị nghe lén.
-- **Xác thực đa yếu tố (MFA)**: Cung cấp mã một lần (OTP), mã QR, hoặc sinh trắc học để xác nhận danh tính người dùng khi đăng nhập vào các hệ thống quan trọng (ví dụ: ứng dụng RSA Authenticator).
-- **Bảo mật hệ thống**: Bảo vệ thông tin cá nhân, tài liệu mật quốc gia, và dữ liệu nhạy cảm được lưu trữ và xử lý trong các hệ thống công nghệ thông tin.
-- **Ứng dụng trong lập trình**: Được tích hợp vào code Java và các ngôn ngữ khác để tăng cường bảo mật cho ứng dụng và trang web. 
+- **Bảo mật giao dịch trực tuyến**: RSA hỗ trợ bảo mật giao dịch trực tuyến chủ yếu qua TLS/HTTPS (xác thực + trao đổi khóa), còn dữ liệu phiên được mã hóa bằng AES/ChaCha20.
+- **Chữ ký số**: RSA dùng để ký số (RSASSA-PSS/PKCS#1) cho tài liệu/hợp đồng, đảm bảo xác thực, toàn vẹn, chống chối bỏ; được triển khai trong các chuẩn như X.509/PKI.
+- **Xác thực đa yếu tố (MFA)**: MFA chủ yếu dùng OTP/TOTP, push, sinh trắc học; RSA có thể dùng trong cơ chế challenge–response hoặc ký số để xác thực thiết bị/người dùng (tùy hệ thống).
+- **Bảo mật hệ thống**: RSA hỗ trợ bảo vệ dữ liệu nhạy cảm chủ yếu thông qua mô hình lai: RSA bảo vệ khóa, còn dữ liệu được mã hóa bằng AES.
 
 ## 5. Missions. 
 
