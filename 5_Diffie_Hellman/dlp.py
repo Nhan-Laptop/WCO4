@@ -133,7 +133,6 @@ def dlp_2adic(g,h,p):
 x_ = dlp_2adic(g,h,p)
 print("2-adic DLP solution x_ =", x_)
 print(x == x_)
-
 def dlp_padic(g,h, p, q): 
     '''
     solve the dlp on the group of order p^k
@@ -141,14 +140,36 @@ def dlp_padic(g,h, p, q):
     n = g.multiplicative_order()
     k = n.valuation(q)
     assert p - 1 == q**k 
-    a = 0 
+    x = 0 
     b_j = h 
     alpha = pow(g, n//q, p)
     for j in range(k):
         h_i = pow(b_j, n//(q**(j+1)), p)
         a_j = bsgs_dlp(alpha, h_i, p)
-        a += a_j * (q**j)
+        assert a_j >=0 and a_j < q 
+        x += a_j * (q**j)
         mul = pow(g, a_j * (q**j), p)
         assert gcd(mul, p)==1
         b_j = (b_j * pow(mul, p-2, p)) % p
-    return a 
+    return x 
+
+def pohlig_hellman(g,h,p):
+    '''
+    solve the dlp on the group of order n
+    where n = p1^k1 * p2^k2 * ... * pt^kt
+    '''
+    n = g.multiplicative_order()
+    factorization = n.factor()
+    x_list = []
+    mod_list = []
+    for (q, e) in factorization:
+        if q == 2:
+            x_q = dlp_2adic(g,h,p)
+            x_list.append(x_q)
+            mod_list.append(2**e)
+            continue
+        x_q = dlp_padic(g,h,p,q)
+        x_list.append(x_q)
+        mod_list.append(q**e)
+    x = crt(x_list, mod_list)
+    return x
