@@ -24,8 +24,11 @@ def floor_div(a,b):
     return a//b 
 def ceil_div(a,b): 
     return floor_div(a,b) + (a%b > 0)
-def bsgs_dlp(g,y,p):
-    n = g.multiplicative_order()
+def bsgs_dlp(g,y,p, order = None):
+    if order is None:
+        n = g.multiplicative_order()
+    else:
+        n = order
     m = ceil_div(isqrt(n),1) + 1 
     table = {}
     baby_step = 1
@@ -165,7 +168,7 @@ def dlp_padic(g,h, p, q):
     alpha = pow(g, n//q, p)
     for j in range(k):
         h_i = pow(b_j, n//(q**(j+1)), p)
-        a_j = bsgs_dlp(alpha, h_i, p)
+        a_j = bsgs_dlp(alpha, h_i, p, order = q)
         assert a_j >=0 and a_j < q 
         x += a_j * (q**j)
         mul = pow(g, a_j * (q**j), p)
