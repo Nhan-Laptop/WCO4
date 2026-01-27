@@ -99,3 +99,56 @@ def pollard_rho_dlp(g,y,p):
 
 x_rho = pollard_rho_dlp(g,y,p)
 print("Pollard's Rho DLP solution x_rho =", x_rho)
+
+
+'''
+
+'''
+p = 257
+F = GF(p)
+g = F.multiplicative_generator()
+print(g.multiplicative_order())
+x = randrange(1, p)
+h = g**x 
+def dlp_2adic(g,h,p):
+    '''
+    solve the dlp on the group of order 2^k
+    '''
+    n = g.multiplicative_order()
+    k = n.valuation(2)
+    x = ""
+    for i in range(1,k+1):
+        val = pow(h, n//(2**i),p)
+        if val == 1:
+            x += "0"
+            # c0 =0 
+            h = h 
+        else:
+            x += "1"
+            # c0 = 1 
+            # precompute h for next step
+            mul = pow(g, 2**(i-1), p) 
+            h = h * pow(mul, p-2, p) % p 
+    return Integer(x[::-1],2)
+x_ = dlp_2adic(g,h,p)
+print("2-adic DLP solution x_ =", x_)
+print(x == x_)
+
+def dlp_padic(g,h, p, q): 
+    '''
+    solve the dlp on the group of order p^k
+    '''
+    n = g.multiplicative_order()
+    k = n.valuation(q)
+    assert p - 1 == q**k 
+    a = 0 
+    b_j = h 
+    alpha = pow(g, n//q, p)
+    for j in range(k):
+        h_i = pow(b_j, n//(q**(j+1)), p)
+        a_j = bsgs_dlp(alpha, h_i, p)
+        a += a_j * (q**j)
+        mul = pow(g, a_j * (q**j), p)
+        assert gcd(mul, p)==1
+        b_j = (b_j * pow(mul, p-2, p)) % p
+    return a 
