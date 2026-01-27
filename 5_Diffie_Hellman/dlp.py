@@ -100,7 +100,6 @@ def pollard_rho_dlp(g,y,p):
 x_rho = pollard_rho_dlp(g,y,p)
 print("Pollard's Rho DLP solution x_rho =", x_rho)
 
-
 '''
 
 '''
@@ -133,6 +132,27 @@ def dlp_2adic(g,h,p):
 x_ = dlp_2adic(g,h,p)
 print("2-adic DLP solution x_ =", x_)
 print(x == x_)
+# def floor_div(a,b):
+#     return a//b 
+# def ceil_div(a,b): 
+#     return floor_div(a,b) + (a%b > 0)
+# def bsgs_dlp(g,y,p):
+#     n = g.multiplicative_order()
+#     m = ceil_div(isqrt(n),1) + 1 
+#     table = {}
+#     baby_step = 1
+#     for i in range(m):
+#         table[baby_step] = i 
+#         baby_step = (baby_step * g) % p 
+
+#     lamb = pow(g, n - m, p) 
+#     giant_step = y 
+#     for j in range(m):
+#         if giant_step in table:
+#             return j*m + table[giant_step]
+#         giant_step = (giant_step * lamb) % p
+#     return None 
+
 def dlp_padic(g,h, p, q): 
     '''
     solve the dlp on the group of order p^k
@@ -163,13 +183,15 @@ def pohlig_hellman(g,h,p):
     x_list = []
     mod_list = []
     for (q, e) in factorization:
-        if q == 2:
-            x_q = dlp_2adic(g,h,p)
-            x_list.append(x_q)
-            mod_list.append(2**e)
-            continue
-        x_q = dlp_padic(g,h,p,q)
-        x_list.append(x_q)
-        mod_list.append(q**e)
-    x = crt(x_list, mod_list)
-    return x
+            g_sub = pow(g, n // (q**e), p)
+            h_sub = pow(h, n // (q**e), p)
+            
+            if q == 2:
+                xi = dlp_2adic(g_sub, h_sub, p)
+            else:
+                xi = dlp_padic(g_sub, h_sub, p, q)
+                
+            x_list.append(xi)
+            mod_list.append(q**e)
+            
+    return crt(x_list, mod_list)
