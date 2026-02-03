@@ -1,19 +1,3 @@
----
-title: "Elliptic Curve Cryptography"
-description: "Elliptic Curve Cryptography là một phương pháp mật mã khóa công khai dựa trên cấu trúc đại số của các đường cong elip trên các trường hữu hạn"
-date: 2026-02-01T12:27:52+07:00
-cover: /images/ECC/avatar.png
-license:
-math: true
-hidden: false
-comments: true
-tags:
-    - Cryptography
-    - Research
-categories:
-    - Learning
----
-
 # Elliptic Curve Cryptography
 Elliptic Curve Cryptography được đề xuất sử dụng bởi Neal Koblitz và Victor S. Miller vào năm 1985, sau đó được sử dụng rộng rãi từ năm 2004. Bài viết này sẽ cho các bạn những kiến thức nền tảng liên quan và mở rộng để hiểu rõ và áp dụng ECC trong thực tiễn (bảo mật web (HTTPS/TLS), tiền điện tử (Bitcoin, Ethereum), trao đổi khóa an toàn (ECDH), chữ ký số, và thiết bị di động/IoT).
 ## Elliptic Curve
