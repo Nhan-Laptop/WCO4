@@ -19,7 +19,7 @@ Bạn có thể tham khảo thêm tại [đây](https://en.wikipedia.org/wiki/El
 Cách xây dựng đường cong Elliptic trong Sagemath:
 ```python
 from sage.all import *
-p = 65535
+p = 131
 F = GF(p) # Construct finite field
 E = EllipticCurve(F, [-3, 3]) #(E): Y^2 = X^3 + -3X + 3
 ```
@@ -33,7 +33,7 @@ Do nằm trong trường hữu hạn, nên số lượng điểm $(X, Y)$ của 
 
 ```python
 from sage.all import *
-E = EllipticCurve(GF(65535), [-3, 3]) #(E): Y^2 = X^3 + -3X + 3
+E = EllipticCurve(GF(131), [-3, 3]) #(E): Y^2 = X^3 + -3X + 3
 n = E.order() #Get order of curve
 ```
 
@@ -43,6 +43,10 @@ Khi đó, E có những nguyên tắc cộng như sau:
 2. **Tính nghịch đảo [Inverse]**: Với mỗi phần tử $P \in (E)$, tồn tại phần tử nghịch đảo $Q = -P \in (E)$ sao cho: $P + Q = Q + P = \mathcal{O}$.
 3. **Tính kết hợp [Associative]**: $(P + Q) + R = P + (Q + R), \forall P, Q, R \in (E)$
 4. **Tính giao hoán [Commutative]**: $P + Q = Q + P, \forall P, Q \in (E)$.
+
+Điểm $\mathcal{O}$ ở tính chất 1 và 2 còn được gọi là điểm vô cực. Nó là phần tử đơn vị của nhóm cộng các điểm trên đường cong, hoạt động tương tự như số 0 trong phép cộng thông thường và đại diện cho giao điểm của các đường thẳng đứng.
+
+![images](./O.png)
 
 Tiếp theo, ta sẽ đến với thuật toán cộng trên đường cong Elliptic:
 
@@ -67,12 +71,15 @@ Cho điểm $P \in E(\mathbb{F}_p)$ và số nguyên $n \ge 1$
     - Nếu $n > 0$, tiếp tục vòng lặp tại bước 2.
 3. Trả về điểm $R$, lúc này $R = nP$
 
+Ở đây, ta tính $nP$ trong $O(\log n)$ bước bằng phương pháp này, vì lúc này n được phân tích thành:
+$$n =n_0 + n_1 * 2+ n_2 *2^2 + \cdots + n_r*2^r$$
+, với $n_0, \cdots, n_r \in \{0, 1\}$
 > Chú ý: $\mathcal{O} = n * P$, với $n = \#E(\mathbb{F}_p)$. Từ đó, nếu $a * P + b * P = c * P$, ta có thể hiểu là $a + b = c \mod n$
 
 Vì phép cộng và nhân đã được tích hợp sẵn trên sagemath nên ta có thể tận dụng nó luôn:
 ```python
 from sage.all import *
-E = EllipticCurve(GF(65535), [-3, 3]) #(E): Y^2 = X^3 + -3X + 3
+E = EllipticCurve(GF(131), [-3, 3]) #(E): Y^2 = X^3 + -3X + 3
 P = E.random_point() #Get a random point in (E)
 Q = E.random_point() #Get another random point in (E)
 n = E.order() #Get order of curve
@@ -117,7 +124,7 @@ Bài tập **tự do (Không bắt buộc)**:
 - Dreamhack:
 1. [Not So Smart](https://dreamhack.io/wargame/challenges/390)
 2. [TEC](https://dreamhack.io/wargame/challenges/914)
-3. [ezCurve](https://github.com/Nhan-Laptop/WCO4/tree/main/6_Elliptic_Curve_Cryptography/src) - Wannagame Championship 2023
+- Wannagame Championship 2023: [ezCurve](https://github.com/Nhan-Laptop/WCO4/tree/main/6_Elliptic_Curve_Cryptography/src)
 ## Tài liệu tham khảo
 - Chương 6: Elliptic Curves and Cryptography trong cuốn An Introduction to Mathematical Cryptography của Jeffrey Hoffstein, Jill Pipher, Joseph H. Silverman
 - Cuốn The Arithmetic of Elliptic Curves của Joseph H. Silverman
