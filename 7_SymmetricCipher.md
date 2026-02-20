@@ -4,7 +4,7 @@ Symmetric cipher (mật mã đối xứng) là phương pháp mã hóa sử dụ
 Các loại mã hóa đối xứng hiện nay được chia ra thành 2 loại cơ bản:
 - Stream cipher
 - Block cipher
- 
+
 ## Block Cipher
 
 Block cipher là thuật toán mật mã đối xứng mã hóa dữ liệu theo từng khối (block) có kích thước cố định — phổ biến nhất là 128 bit. Mỗi block plaintext sẽ được biến đổi thành một block ciphertext thông qua một hàm phụ thuộc vào khóa bí mật.
@@ -32,8 +32,8 @@ C = P \oplus \text{keystream}
 $$
 
 Ví dụ:
-- [RC4]((https://littlenopro.github.io/posts/Stream_Ciphers/))
-- [ChaCha20]((https://littlenopro.github.io/posts/Stream_Ciphers/))
+- [RC4](https://littlenopro.github.io/posts/Stream_Ciphers/)
+- [ChaCha20](https://littlenopro.github.io/posts/Stream_Ciphers/)
 
 Stream cipher thường dùng cho dữ liệu truyền liên tục như âm thanh, video, hoặc giao thức mạng thời gian thực.
 
